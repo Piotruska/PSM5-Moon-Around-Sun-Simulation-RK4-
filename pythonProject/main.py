@@ -55,3 +55,18 @@ def f(t, x):
     return np.array([vxE, vyE, axE, ayE, vxM, vyM, axM, ayM])
 
 
+
+def simulate_orbits():
+    t = t0
+    x = x0
+    xs, ys, xm, ym = [], [], [], []
+
+    while t <= tf:
+        xs.append(x[0])
+        ys.append(x[1])
+        xm.append(x[4])
+        ym.append(x[5])
+        x = rk4_step(t, x, h)
+        t += h
+
+    return xs, ys, xm, ym
