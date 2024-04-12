@@ -39,3 +39,19 @@ def rk4_step(t, x, h):
     k4 = f(t + h, x + h * k3)
     return x + (h / 6) * (k1 + 2 * k2 + 2 * k3 + k4)
 
+def f(t, x):
+    xE, yE, vxE, vyE, xM, yM, vxM, vyM = x
+    rES = np.sqrt(xE ** 2 + yE ** 2)
+    rMS = np.sqrt(xM ** 2 + yM ** 2)
+    rEM = np.sqrt((xM - xE) ** 2 + (yM - yE) ** 2)
+
+    # Earth's acceleration due to the Sun's gravity
+    axE = -G * Ms * xE / (rES ** 3)
+    ayE = -G * Ms * yE / (rES ** 3)
+    # Moon's acceleration due to the Sun's and Earth's gravity
+    axM = -G * Ms * xM / (rMS ** 3) + G * Me * (xE - xM) / (rEM ** 3)
+    ayM = -G * Ms * yM / (rMS ** 3) + G * Me * (yE - yM) / (rEM ** 3)
+
+    return np.array([vxE, vyE, axE, ayE, vxM, vyM, axM, ayM])
+
+
