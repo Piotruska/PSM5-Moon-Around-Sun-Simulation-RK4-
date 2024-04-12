@@ -70,3 +70,12 @@ def simulate_orbits():
         t += h
 
     return xs, ys, xm, ym
+
+#Simulate orbits
+xs, ys, xm, ym = simulate_orbits()
+
+# Plot Orbits
+plot_orbits(xs, ys, xm, ym, scale_factor=25)
+
+# Animate Orbit
+animate_orbits(xs, ys, xm, ym, N, scale_factor=25)
